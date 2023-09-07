@@ -1,0 +1,42 @@
+#Install and load a package 
+install.packages("tidyverse") 
+
+ library("tidyverse")  // require("tidyverse")
+
+# packages contain databases to practise on, to view them -->  data() 
+
+# to view a summary of a database (example = msleep)
+glimpse(msleep) 
+
+# To view a database 
+view(msleep) 
+
+# To rename a coloumn / variable - (%>% = AND THEN)
+msleep %>%
++ rename("conserv" = "conservation")
+
+## Changing variable type
+
+ msleep$sleep_total <- as.factor(msleep$sleep_total)  - This changes sleep_total from a dbl to a factor
+
+> glimpse(msleep) - to check if change has been done 
+
+## OR can also do it like:
+msleep%>%
++ mutate(sleep_total = as.double(sleep_total)) %>%
++ glimpse()
+## this  changes sleep_total to a Double variable type -- which just means it stored with 2 decimal points 
+
+## Show coloumn names in our database 
+names(msleep) 
+
+## Selecting a group of variables
+msleep %>%
++ select(2:5, awake              ## 2:5 demands the coloums from 2 to 5
++ , starts_with("sleep"),        ## starts_with 
++ contains("wt"))%>%             ## contains (any letters you want)
++ names()                        ## must end with names to tell R thats what you want
+
+## FILTERING AND ARRANGING DATA
+
+unique(msleep$order)       ## this shows you all possible observations for a given variable 
